@@ -15,9 +15,11 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^11.5",
+        "rector/rector": "^2.2"
     },
     "scripts": {
+        "rector": "rector",
         "test": "phpunit"
     }
 }

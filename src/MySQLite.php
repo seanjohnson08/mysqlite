@@ -4,9 +4,6 @@ namespace MySQLite;
 
 use Error;
 use PDO;
-use ReflectionParameter;
-
-use function array_find;
 
 class MySQLite {
     /**
