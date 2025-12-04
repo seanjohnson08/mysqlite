@@ -11,15 +11,29 @@ class MySQLite {
             throw new Error('Cannot install MySQLite: sqlite driver not supported');
         }
 
-        $polyfills = [
-            ...DateTimeFunctions::getPolyfills(),
-        ];
+        $extensions = [DateTimeFunctions::class];
 
-        array_map(static fn($args) => $pdo->sqliteCreateFunction(...$args), $polyfills);
+        foreach (self::getPolyfills($extensions) as $args) {
+            $pdo->sqliteCreateFunction(...$args);
+        }
     }
 
     public static function hasSQLiteDriver(PDO $pdo) {
-        $drivers = $pdo->getAvailableDrivers();
-        return in_array('sqlite', $drivers);
+        return in_array('sqlite', $pdo->getAvailableDrivers());
+    }
+
+    private static function getPolyfills(array $extensions): \Generator
+    {
+        foreach ($extensions as $className) {
+            $reflection = new \ReflectionClass($className);
+            $methods = $reflection->getMethods(\ReflectionMethod::IS_STATIC | \ReflectionMethod::IS_PUBLIC);
+
+            foreach ($methods as $method) {
+                $name = $method->getName();
+                $argsCount = $method->getNumberOfParameters();
+
+                yield [$name, [$className, $name], $argsCount];
+            }
+        }
     }
 }
