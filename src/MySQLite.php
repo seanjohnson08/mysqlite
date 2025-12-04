@@ -4,6 +4,9 @@ namespace MySQLite;
 
 use Error;
 use PDO;
+use ReflectionParameter;
+
+use function array_find;
 
 class MySQLite {
     /**
@@ -14,7 +17,10 @@ class MySQLite {
             throw new Error('Cannot install MySQLite: sqlite driver not supported');
         }
 
-        $extensions = [DateTimeFunctions::class];
+        $extensions = [
+            DateTimeFunctions::class,
+            StringFunctions::class,
+        ];
 
         foreach (self::getPolyfills($extensions) as $args) {
             $pdo->sqliteCreateFunction(...$args);
@@ -36,9 +42,18 @@ class MySQLite {
 
             foreach ($methods as $method) {
                 $name = $method->getName();
-                $argsCount = $method->getNumberOfParameters();
+                $params = $method->getParameters();
 
-                yield [$name, [$className, $name], $argsCount];
+                $argCount = 0;
+                foreach ($params as $param) {
+                    if ($param->isVariadic()) {
+                        $argCount = -1;
+                        break;
+                    }
+                    $argCount++;
+                }
+
+                yield [$name, [$className, $name], $argCount];
             }
         }
     }
