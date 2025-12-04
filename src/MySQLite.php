@@ -6,6 +6,9 @@ use Error;
 use PDO;
 
 class MySQLite {
+    /**
+     * Installs polyfills into the given PDO SQLite connection.
+     */
     public static function install(PDO $pdo) {
         if (!self::hasSQLiteDriver($pdo)) {
             throw new Error('Cannot install MySQLite: sqlite driver not supported');
@@ -22,6 +25,9 @@ class MySQLite {
         return in_array('sqlite', $pdo->getAvailableDrivers());
     }
 
+    /**
+     * @param class-string[] $extensions
+     */
     private static function getPolyfills(array $extensions): \Generator
     {
         foreach ($extensions as $className) {
