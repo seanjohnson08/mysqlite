@@ -2,7 +2,7 @@
     "name": "seanjohnson08/mysqlite",
     "description": "Polyfills for SQLite to make it as compatible with MySQL queries as possible.",
     "type": "library",
-    "version": "0.0.1",
+    "license": "MIT",
     "authors": [
         {
             "name": "Sean Johnson",
