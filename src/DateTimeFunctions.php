@@ -17,6 +17,14 @@ class DateTimeFunctions {
 
         return (int) $parsed->format('m');
     }
+
+    /**
+     * Returns the current date and time as a string in 'Y-m-d H:i:s' format.
+     */
+    public static function NOW(): string {
+        $now = new DateTime();
+        return $now->format('Y-m-d H:i:s');
+    }
     
     /**
      * Extracts the year from a date or datetime string.

@@ -1,6 +1,5 @@
 <?php
 
-use MySQLite\DateTimeFunctions;
 use MySQLite\MySQLite;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;

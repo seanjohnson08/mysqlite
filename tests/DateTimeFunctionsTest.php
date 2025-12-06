@@ -64,4 +64,15 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertNull($result->fetchColumn(0));
     }
     
+    public function testNow() {
+        $result = $this->pdo->query(<<<SQL
+            SELECT NOW()
+        SQL);
+
+        $now = new DateTimeImmutable();
+        $fetched = new DateTimeImmutable($result->fetchColumn(0));
+
+        // Allow for up to 5 seconds of difference
+        $this->assertLessThanOrEqual(5, abs($now->getTimestamp() - $fetched->getTimestamp()));
+    }
 }
