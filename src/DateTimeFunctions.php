@@ -38,36 +38,12 @@ class DateTimeFunctions
     }
 
     /**
-     * Returns the current date as a string in 'Y-m-d' format.
-     */
-    public static function CURRENT_DATE(): string
-    {
-        return self::CURDATE();
-    }
-
-    /**
      * Returns the current time as a string in 'H:i:s' format.
      */
     public static function CURTIME(): string
     {
         $now = new DateTime();
         return $now->format('H:i:s');
-    }
-
-    /**
-     * Returns the current time as a string in 'H:i:s' format.
-     */
-    public static function CURRENT_TIME(): string
-    {
-        return self::CURTIME();
-    }
-
-    /**
-     * Returns the current date and time as a string in 'Y-m-d H:i:s' format.
-     */
-    public static function CURRENT_TIMESTAMP(): string
-    {
-        return self::NOW();
     }
 
     /**

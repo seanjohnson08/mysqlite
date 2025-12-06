@@ -152,41 +152,4 @@ class DateTimeFunctionsTest extends TestCase
 
         $this->assertEquals($now->format('H:i'), $fetched->format('H:i'));
     }
-
-    public function testCurrentDate()
-    {
-        $result = $this->pdo->query(<<<SQL
-            SELECT CURRENT_DATE()
-        SQL);
-
-        $now = new DateTimeImmutable();
-        $fetched = new DateTimeImmutable($result->fetchColumn(0));
-
-        $this->assertEquals($now->format('Y-m-d'), $fetched->format('Y-m-d'));
-    }
-
-    public function testCurrentTime()
-    {
-        $result = $this->pdo->query(<<<SQL
-            SELECT CURRENT_TIME()
-        SQL);
-
-        $now = new DateTimeImmutable();
-        $fetched = new DateTimeImmutable($result->fetchColumn(0));
-
-        $this->assertEquals($now->format('H:i'), $fetched->format('H:i'));
-    }
-
-    public function testCurrentTimestamp()
-    {
-        $result = $this->pdo->query(<<<SQL
-            SELECT CURRENT_TIMESTAMP()
-        SQL);
-
-        $now = new DateTimeImmutable();
-        $fetched = new DateTimeImmutable($result->fetchColumn(0));
-
-        // Allow for up to 5 seconds of difference
-        $this->assertLessThanOrEqual(5, abs($now->getTimestamp() - $fetched->getTimestamp()));
-    }
 }
