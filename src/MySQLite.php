@@ -5,11 +5,13 @@ namespace MySQLite;
 use Error;
 use PDO;
 
-class MySQLite {
+class MySQLite
+{
     /**
      * Installs polyfills into the given PDO SQLite connection.
      */
-    public static function install(PDO $pdo): PDO {
+    public static function install(PDO $pdo): PDO
+    {
         if (!self::hasSQLiteDriver($pdo)) {
             throw new Error('Cannot install MySQLite: sqlite driver not supported');
         }
@@ -26,7 +28,8 @@ class MySQLite {
         return $pdo;
     }
 
-    public static function hasSQLiteDriver(PDO $pdo) {
+    public static function hasSQLiteDriver(PDO $pdo)
+    {
         return in_array('sqlite', $pdo->getAvailableDrivers());
     }
 

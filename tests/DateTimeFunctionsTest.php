@@ -6,7 +6,8 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(DateTimeFunctions::class)]
-class DateTimeFunctionsTest extends TestCase {
+class DateTimeFunctionsTest extends TestCase
+{
     private PDO $pdo;
 
     public function setUp(): void
@@ -16,7 +17,8 @@ class DateTimeFunctionsTest extends TestCase {
         MySQLite::install($this->pdo);
     }
 
-    public function testMonthDateTime() {
+    public function testMonthDateTime()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT MONTH("2025-12-04 10:47:00")
         SQL);
@@ -24,7 +26,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($result->fetchColumn(0), 12);
     }
 
-    public function testMonthDate() {
+    public function testMonthDate()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT MONTH("2025-12-04")
         SQL);
@@ -32,7 +35,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($result->fetchColumn(0), 12);
     }
 
-    public function testMonthNull() {
+    public function testMonthNull()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT MONTH(NULL)
         SQL);
@@ -40,7 +44,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertNull($result->fetchColumn(0));
     }
 
-    public function testYearDateTime() {
+    public function testYearDateTime()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT YEAR("2025-12-04 10:47:00")
         SQL);
@@ -48,7 +53,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($result->fetchColumn(0), 2025);
     }
 
-    public function testYearDate() {
+    public function testYearDate()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT YEAR("2025-12-04")
         SQL);
@@ -56,15 +62,17 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($result->fetchColumn(0), 2025);
     }
 
-    public function testYearNull() {
+    public function testYearNull()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT YEAR(NULL)
         SQL);
 
         $this->assertNull($result->fetchColumn(0));
     }
-    
-    public function testNow() {
+
+    public function testNow()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT NOW()
         SQL);
@@ -76,7 +84,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertLessThanOrEqual(5, abs($now->getTimestamp() - $fetched->getTimestamp()));
     }
 
-    public function testDayDateTime() {
+    public function testDayDateTime()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT DAY("2025-12-04 10:47:00")
         SQL);
@@ -84,7 +93,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($result->fetchColumn(0), 4);
     }
 
-    public function testDayDate() {
+    public function testDayDate()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT DAY("2025-12-04")
         SQL);
@@ -92,7 +102,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($result->fetchColumn(0), 4);
     }
 
-    public function testDayNull() {
+    public function testDayNull()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT DAY(NULL)
         SQL);
@@ -100,7 +111,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertNull($result->fetchColumn(0));
     }
 
-    public function testDayOfMonthDateTime() {
+    public function testDayOfMonthDateTime()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT DAYOFMONTH("2025-12-04 10:47:00")
         SQL);
@@ -108,7 +120,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($result->fetchColumn(0), 4);
     }
 
-    public function testDayOfMonthDate() {
+    public function testDayOfMonthDate()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT DAYOFMONTH("2025-12-04")
         SQL);
@@ -116,7 +129,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($result->fetchColumn(0), 4);
     }
 
-    public function testCurDate() {
+    public function testCurDate()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT CURDATE()
         SQL);
@@ -127,7 +141,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($now->format('Y-m-d'), $fetched->format('Y-m-d'));
     }
 
-    public function testCurTime() {
+    public function testCurTime()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT CURTIME()
         SQL);
@@ -138,7 +153,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($now->format('H:i'), $fetched->format('H:i'));
     }
 
-    public function testCurrentDate() {
+    public function testCurrentDate()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT CURRENT_DATE()
         SQL);
@@ -149,7 +165,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($now->format('Y-m-d'), $fetched->format('Y-m-d'));
     }
 
-    public function testCurrentTime() {
+    public function testCurrentTime()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT CURRENT_TIME()
         SQL);
@@ -160,7 +177,8 @@ class DateTimeFunctionsTest extends TestCase {
         $this->assertEquals($now->format('H:i'), $fetched->format('H:i'));
     }
 
-    public function testCurrentTimestamp() {
+    public function testCurrentTimestamp()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT CURRENT_TIMESTAMP()
         SQL);
@@ -171,6 +189,4 @@ class DateTimeFunctionsTest extends TestCase {
         // Allow for up to 5 seconds of difference
         $this->assertLessThanOrEqual(5, abs($now->getTimestamp() - $fetched->getTimestamp()));
     }
-
-    
 }

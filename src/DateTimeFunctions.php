@@ -4,11 +4,13 @@ namespace MySQLite;
 
 use DateTime;
 
-class DateTimeFunctions {
+class DateTimeFunctions
+{
     /**
      * Extracts the day from a date or datetime string.
      */
-    public static function DAY(?string $datetime): ?int {
+    public static function DAY(?string $datetime): ?int
+    {
         if ($datetime === null) {
             return null;
         }
@@ -21,14 +23,16 @@ class DateTimeFunctions {
     /**
      * Extracts the day from a date or datetime string.
      */
-    public static function DAYOFMONTH(?string $datetime): ?int {
+    public static function DAYOFMONTH(?string $datetime): ?int
+    {
         return self::DAY($datetime);
     }
 
     /**
      * Returns the current date as a string in 'Y-m-d' format.
      */
-    public static function CURDATE(): string {
+    public static function CURDATE(): string
+    {
         $now = new DateTime();
         return $now->format('Y-m-d');
     }
@@ -36,14 +40,16 @@ class DateTimeFunctions {
     /**
      * Returns the current date as a string in 'Y-m-d' format.
      */
-    public static function CURRENT_DATE(): string {
+    public static function CURRENT_DATE(): string
+    {
         return self::CURDATE();
     }
 
     /**
      * Returns the current time as a string in 'H:i:s' format.
      */
-    public static function CURTIME(): string {
+    public static function CURTIME(): string
+    {
         $now = new DateTime();
         return $now->format('H:i:s');
     }
@@ -51,21 +57,24 @@ class DateTimeFunctions {
     /**
      * Returns the current time as a string in 'H:i:s' format.
      */
-    public static function CURRENT_TIME(): string {
+    public static function CURRENT_TIME(): string
+    {
         return self::CURTIME();
     }
-    
+
     /**
      * Returns the current date and time as a string in 'Y-m-d H:i:s' format.
      */
-    public static function CURRENT_TIMESTAMP(): string {
+    public static function CURRENT_TIMESTAMP(): string
+    {
         return self::NOW();
     }
 
     /**
      * Extracts the month from a date or datetime string.
      */
-    public static function MONTH(?string $datetime): ?int {
+    public static function MONTH(?string $datetime): ?int
+    {
         if ($datetime === null) {
             return null;
         }
@@ -78,15 +87,17 @@ class DateTimeFunctions {
     /**
      * Returns the current date and time as a string in 'Y-m-d H:i:s' format.
      */
-    public static function NOW(): string {
+    public static function NOW(): string
+    {
         $now = new DateTime();
         return $now->format('Y-m-d H:i:s');
     }
-    
+
     /**
      * Extracts the year from a date or datetime string.
      */
-    public static function YEAR(?string $datetime): ?int {
+    public static function YEAR(?string $datetime): ?int
+    {
         if ($datetime === null) {
             return null;
         }

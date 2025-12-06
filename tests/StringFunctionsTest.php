@@ -5,7 +5,8 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(StringFunctionsTest::class)]
-class StringFunctionsTest extends TestCase {
+class StringFunctionsTest extends TestCase
+{
     private PDO $pdo;
 
     public function setUp(): void
@@ -15,7 +16,8 @@ class StringFunctionsTest extends TestCase {
         MySQLite::install($this->pdo);
     }
 
-    public function testConcat() {
+    public function testConcat()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT CONCAT("A", "B", "C", 123)
         SQL);
@@ -23,11 +25,12 @@ class StringFunctionsTest extends TestCase {
         $this->assertEquals($result->fetchColumn(0), "ABC123");
     }
 
-    public function testConcatWithNull() {
+    public function testConcatWithNull()
+    {
         $result = $this->pdo->query(<<<SQL
             SELECT CONCAT("A", "B", NULL, "C", 123)
         SQL);
 
-        $this->assertEquals($result->fetchColumn(0), NULL);
-    }  
+        $this->assertEquals($result->fetchColumn(0), null);
+    }
 }
